@@ -6,4 +6,12 @@ const register = (body)=>{
 
 }
 
-module.exports = {register}
+
+const findUser =(email)=>{
+
+
+    return userSchema.findOne({email})
+
+}
+
+module.exports = {register,findUser}

@@ -4,12 +4,15 @@ const express = require('express')
 const  routes  = require('./routes')
 const bodyParser = require('body-parser')
 const dbConnect = require('./db/dbConnect')
+const cookieParser = require('cookie-parser')
 const app = express()
 
 
 //body parser
 app.use(bodyParser.urlencoded({extended:false}))
 app.use(bodyParser.json())
+
+app.use(cookieParser())
 
 //ejs view template
 app.set('view engine','ejs')
