@@ -1,12 +1,14 @@
 const express = require('express')
 const { userController } = require('../controllers')
-const { autheticate } = require('../middleware/auth')
+const { autheticate, restrict } = require('../middleware/auth')
 const route = express.Router()
 
 
 route.post('/register',userController.register)
 route.post('/login',userController.login)
-route.get('/profile',autheticate,userController.getProfile)
+route.get('/profile',autheticate,restrict(['admin','user']),userController.getProfile)
+route.get('/user',autheticate,userController.getProfile)
+
 
 
 module.exports = route

@@ -24,4 +24,24 @@ const autheticate = (req,res,next)=>{
 
 }
 
-module.exports={createToken,autheticate}
+
+const restrict=(...data)=>{
+
+return (req,res,next)=>{
+
+    let user = req.user
+    console.log(user,"restricttttt");
+
+
+    if(data[0].includes(user.role))
+    {
+        req.user=user
+        next()
+    }
+   
+    res.status(400).json({message:"you are not allow"})
+}
+
+}
+
+module.exports={createToken,autheticate,restrict}
