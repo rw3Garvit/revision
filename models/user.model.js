@@ -16,7 +16,13 @@ const userSchema = new mongoose.Schema({
         required:true,
         enum:['admin','user'],
         default:'user'
+    },
+
+    imageName:{
+        type:String
     }
+
+    
 
 })
 

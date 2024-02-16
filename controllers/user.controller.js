@@ -1,15 +1,31 @@
 const { createToken } = require("../middleware/auth")
-const { userService } = require("../services")
+const { userService } = require("../services");
+const { send_mail } = require("../services/email.service");
 
 const register = async(req,res)=>{
 
     console.log(req.body)
+    console.log(req.file);
 
-    const body = req.body
+   
+
+    let body={
+        email:req.body.email,
+        password:req.body.password,
+        imageName:req.file.destination
+    }
+
+
 
     const user=await userService.register(body)
 
-    res.render('./login',{email:user.email})
+    if(user)
+    {
+      let email = await send_mail(body.email,"Hello Welcome","Welcome mail")
+      console.log(email);
+    }
+
+    // res.render('./login',{email:user.email})
     // res.redirect('/')
 
     res.status(201).json({
